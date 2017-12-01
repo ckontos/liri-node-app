@@ -43,14 +43,15 @@ if (argument === "my-tweets") {
 //function for getting song names
 
 function spotifySong(songName) {
-
     var spotify = new Spotify({
         id: 'c302112825c54086b64cd358c3c1c5d6',
         secret: '9939b85aa3954e8b8d2d48a8ca6cded1'
     });
 
     var userSong = process.argv;
-    var songName = '';
+    if (!songName) {
+        var songName = '';
+    }
     var params = songName;
 
     for (var i = 3; i < userSong.length; i++) {
@@ -65,10 +66,11 @@ function spotifySong(songName) {
     }
 
     if (songName === '') {
-        songName = "The+Sign";
+        songName = "The+Sign+Ace";
     }
 
     params = songName;
+
 
     spotify.search({ type: 'track', query: params }, function(err, data) {
         if (!err) {
@@ -174,6 +176,9 @@ function doWhatItSays() {
             }
             else if (dataArr.length == 1) {
                 pick(userCommand);
+            }
+            else {
+                console.log('There is no information to read!');
             }
         }
     });
